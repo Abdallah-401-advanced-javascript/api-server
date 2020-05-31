@@ -1,0 +1,44 @@
+{
+  "categories": [
+    {
+      "name": "anas",
+      "display_name": "4",
+      "description": "4rd best one in the neighbourhood",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "abdallah",
+      "display_name": "dedo",
+      "description": "Sec best one in the neighbourhood"
+    },
+    {
+      "id": 3,
+      "name": "ahmad",
+      "display_name": "hmoodah",
+      "description": "3rd best one in the neighbourhood"
+    },
+    {
+      "name": "anas",
+      "display_name": "2",
+      "description": "4rd best one in the neighbourhood",
+      "id": 4
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "category": "family",
+      "name": "ali",
+      "display_name": "aloosh",
+      "description": "Best one in the neighbourhood"
+    },
+    {
+      "id": 2,
+      "category": "family",
+      "name": "abdallah",
+      "display_name": "****",
+      "description": "Sec best one in the neighbourhood"
+    }
+  ]
+}
