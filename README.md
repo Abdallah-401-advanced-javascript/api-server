@@ -1,7 +1,7 @@
-# LAB - 06
+# LAB - 07
 
 <!-- ## Project: Project Name Here -->
-## HTTP and REST
+## Express
 
 ### Author: Abdallah Obaid
 
