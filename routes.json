@@ -1,4 +1,0 @@
-{
-    "/bestRouteEver/*": "/$1",
-    "/bestThanBestRout/*/*": "/$1/$2"
-  }
