@@ -1,19 +1,17 @@
 'use strict';
-// const serverMod = require('../lib/server');
-// const server = serverMod.server;
-const {server} = require('../lib/server');
-const supertest = require('supertest');
-const mockRequest = supertest(server);
 
-describe('web server for products', () => {
+const supergoose = require('@code-fellows/supergoose');
+const { server } = require('../lib/server');
+const mockRequest = supergoose(server);
 
+describe('Server API', ()=> {
   it('should respond with 500', ()=> {   
     return mockRequest.get('/bad')
       .then(results=> {
         expect(results.status).toBe(500);
       }).catch(console.error);
   });
-
+    
   it('should respond 404 of an invalid route',() => {
     return mockRequest
       .get('/invalidroute')
@@ -21,7 +19,7 @@ describe('web server for products', () => {
         expect(results.status).toBe(404);
       }).catch(console.log);
   });
-
+    
   it('should respond properly /products', ()=> {
     return mockRequest
       .get('/products')
@@ -29,111 +27,153 @@ describe('web server for products', () => {
         expect(results.status).toBe(200);
       });
   });
-
-  it('should respond properly /products/id', ()=> {
-    return mockRequest
-      .get('/products/1')
-      .then(results => {
-        expect(results.status).toBe(200);
-      });
-  });
-
-  it('should post data', ()=> {
+  it('it can get() products ', ()=> {
+    let obj = {  'category': 'done',
+      'name': 'abdallah',
+      'display_name': '****',
+      'description': 'Best one in the neighbourhood'};
     return mockRequest
       .post('/products')
-      .send({
-        'category': 'family',
-        'name': 'abdallah',
-        'display_name': '****',
-        'description': 'Best one in the neighbourhood'})
-      .then(results => {
-        expect(results.status).toBe(200);
+      .send(obj)
+      .then(data => {
+        // get all will return an array of all records
+        return mockRequest.get('/products')
+          .then(result => {
+            // console.log(result.body[0]);
+            Object.keys(obj).forEach(key=> {
+              expect(result.body[0][key]).toEqual(obj[key]);
+            });
+          });
       });
   });
 
-  it('should update data', ()=> {
+  it('can post() a new products ', ()=> {
+    let obj = {  'category': 'done',
+      'name': 'abdallah',
+      'display_name': '****',
+      'description': 'Best one in the neighbourhood'};
     return mockRequest
-      .put('/products/1')
-      .send({
-        'category': 'family',
-        'name': 'abdallah',
-        'display_name': '****',
-        'description': 'Best one in the neighbourhood'})
-      .then(results => {
-        expect(results.status).toBe(200);
+      .post('/products')
+      .send(obj)
+      .then(data => {
+        // compare what the post has returned with hwat we submitted
+        // console.log(data.body);
+        expect(data.status).toBe(201);
+        Object.keys(obj).forEach(key => {
+          // check data.body[key] if it matches obj[key]
+          expect(data.body[key]).toEqual(obj[key]);
+        });
       });
   });
 
-  it('should delete data', ()=> {
+  it('TEST post() server failure ', ()=> {
+    let obj = {name: 'test-post-1'};
     return mockRequest
-      .delete('/products/1')
-      .send({
-        'category': 'family',
-        'name': 'abdallah',
-        'display_name': '****',
-        'description': 'Best one in the neighbourhood'})
-      .then(results => {
-        expect(results.status).toBe(200);
+      .post('/products')
+      .send(obj)
+      .then(data => {
+        // compare what the post has returned with hwat we submitted
+        // console.log(data.body);
+        expect(data.status).toBe(500);
       });
   });
 
-});
+  it('TEST post() not found ', ()=> {
+    let obj = {  'category': 'done',
+      'name': 'abdallah',
+      'display_name': '****',
+      'description': 'Best one in the neighbourhood'};
+    return mockRequest
+      .post('/products/notFound')
+      .send(obj)
+      .then(data => {
+        // compare what the post has returned with hwat we submitted
+        // console.log(data.body);
+        expect(data.status).toBe(404);
+      });
+  });
 
-describe('web server for categories', () => {
- 
-  it('should respond properly /categories', ()=> {
+
+  
+
+
+
+
+
+  it('should respond properly /api/v1/categories', ()=> {
     return mockRequest
-      .get('/categories')
+      .get('/api/v1/categories')
       .then(results => {
         expect(results.status).toBe(200);
       });
   });
-  
-  it('should respond properly /categories/id', ()=> {
+  it('it can get() categories ', ()=> {
+    let obj = {
+      'name': 'abdallah',
+      'display_name': '****',
+      'description': 'Best one in the neighbourhood'};
     return mockRequest
-      .get('/categories/1')
-      .then(results => {
-        expect(results.status).toBe(200);
+      .post('/api/v1/categories')
+      .send(obj)
+      .then(data => {
+        // get all will return an array of all records
+        return mockRequest.get('/api/v1/categories')
+          .then(result => {
+            // console.log(result.body[0]);
+            Object.keys(obj).forEach(key=> {
+              expect(result.body[0][key]).toEqual(obj[key]);
+            });
+          });
       });
   });
-  
-  it('should post data', ()=> {
+
+  it('can post() a new categories ', ()=> {
+    let obj = {
+      'name': 'abdallah',
+      'display_name': '****',
+      'description': 'Best one in the neighbourhood'};
     return mockRequest
-      .post('/categories')
-      .send({
-        'category': 'family',
-        'name': 'abdallah',
-        'display_name': '****',
-        'description': 'Best one in the neighbourhood'})
-      .then(results => {
-        expect(results.status).toBe(200);
+      .post('/api/v1/categories')
+      .send(obj)
+      .then(data => {
+        // compare what the post has returned with hwat we submitted
+        // console.log(data.body);
+        expect(data.status).toBe(201);
+        Object.keys(obj).forEach(key => {
+          // check data.body[key] if it matches obj[key]
+          expect(data.body[key]).toEqual(obj[key]);
+        });
       });
   });
-  
-  it('should update data', ()=> {
+
+  it('TEST post() server failure ', ()=> {
+    let obj = {name: 'test-post-1'};
     return mockRequest
-      .put('/categories/1')
-      .send({
-        'category': 'family',
-        'name': 'abdallah',
-        'display_name': '****',
-        'description': 'Best one in the neighbourhood'})
-      .then(results => {
-        expect(results.status).toBe(200);
+      .post('/api/v1/categories')
+      .send(obj)
+      .then(data => {
+        // compare what the post has returned with hwat we submitted
+        // console.log(data.body);
+        expect(data.status).toBe(500);
       });
   });
-  
-  it('should delete data', ()=> {
+
+  it('TEST post() not found ', ()=> {
+    let obj = {  'category': 'done',
+      'name': 'abdallah',
+      'display_name': '****',
+      'description': 'Best one in the neighbourhood'};
     return mockRequest
-      .delete('/categories/1')
-      .send({
-        'category': 'family',
-        'name': 'abdallah',
-        'display_name': '****',
-        'description': 'Best one in the neighbourhood'})
-      .then(results => {
-        expect(results.status).toBe(200);
+      .post('/api/v1/categories/notFound')
+      .send(obj)
+      .then(data => {
+        // compare what the post has returned with hwat we submitted
+        // console.log(data.body);
+        expect(data.status).toBe(404);
       });
-  });
-  
+  });  
+
+        
+
+
 });
