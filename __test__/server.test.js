@@ -22,7 +22,7 @@ describe('Server API', ()=> {
     
   it('should respond properly /products', ()=> {
     return mockRequest
-      .get('/products')
+      .get('/api/v1/products')
       .then(results => {
         expect(results.status).toBe(200);
       });
@@ -33,11 +33,11 @@ describe('Server API', ()=> {
       'display_name': '****',
       'description': 'Best one in the neighbourhood'};
     return mockRequest
-      .post('/products')
+      .post('/api/v1/products')
       .send(obj)
       .then(data => {
         // get all will return an array of all records
-        return mockRequest.get('/products')
+        return mockRequest.get('/api/v1/products')
           .then(result => {
             // console.log(result.body[0]);
             Object.keys(obj).forEach(key=> {
@@ -53,7 +53,7 @@ describe('Server API', ()=> {
       'display_name': '****',
       'description': 'Best one in the neighbourhood'};
     return mockRequest
-      .post('/products')
+      .post('/api/v1/products')
       .send(obj)
       .then(data => {
         // compare what the post has returned with hwat we submitted
@@ -69,7 +69,7 @@ describe('Server API', ()=> {
   it('TEST post() server failure ', ()=> {
     let obj = {name: 'test-post-1'};
     return mockRequest
-      .post('/products')
+      .post('/api/v1/products')
       .send(obj)
       .then(data => {
         // compare what the post has returned with hwat we submitted
@@ -84,7 +84,7 @@ describe('Server API', ()=> {
       'display_name': '****',
       'description': 'Best one in the neighbourhood'};
     return mockRequest
-      .post('/products/notFound')
+      .post('/api/v1/products/notFound')
       .send(obj)
       .then(data => {
         // compare what the post has returned with hwat we submitted
