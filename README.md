@@ -7,9 +7,9 @@
 
 ### Links and Resources
 
-* [submission PR](https://github.com/Abdallah-401-advanced-javascript/api-server/pull/4)
-* [travis](https://github.com/Abdallah-401-advanced-javascript/api-server/pull/4/checks?check_run_id=732765648)
-* [ci/cd](https://github.com/Abdallah-401-advanced-javascript/api-server/runs/732765853?check_suite_focus=true)
+* [submission PR](https://github.com/Abdallah-401-advanced-javascript/api-server/pull/6)
+* [travis](https://github.com/Abdallah-401-advanced-javascript/api-server/pull/6/checks?check_run_id=736987434)
+* [ci/cd](https://github.com/Abdallah-401-advanced-javascript/api-server/pull/6/checks?check_run_id=736990002)
 <!-- - [back-end server url](http://xyz.com) (when applicable) -->
 <!-- * [front-end application](https://abdallah-lab-00.herokuapp.com/)  -->
 
@@ -18,21 +18,21 @@
 * [swagger](https://app.swaggerhub.com/apis/AbdallahObaid/class-06/0.1) 
 
 ### Modules
-#### `categories.js` , `products.js` , `500.js`, `404.js`, `model.js`, `categories-model.js`, `products-model.js`
+#### `pro-ca-routers.js` , `500.js`, `404.js`, `model.js`, `categories-model.js`, `products-model.js`,`timestamp.js`
 ##### Exported Values and Methods
 
 ###### `node index.js `
 This will start listening.
-###### `products.js`
-This will send request to the products crud handler `products-model.js`
-###### `categories.js`
-This will send request to the categories crud handler `categories-model.js`
+###### `pro-ca-routers.js.js`
+This will send request to the products/categories crud handler `products-model.js`/`categories-model.js`
 ###### `products-model.js`
 This will connect the main crud handler `model.js` with the products schema `products-schema.js`
 ###### `categories-model.js`
 This will connect the main crud handler `model.js` with the categories schema `categories-schema.js`
 ###### `model.js`
 This is the main crud handler.
+###### `timestamp.js`
+This Will log the date for the request to the terminal. 
 ###### `404.js`
 This will console for not exist route.
 ###### `500.js`
@@ -68,4 +68,4 @@ const err404 = require('../middleware/404.js');
 
 #### UML
 
-![UML Diagram](whiteboardclass08.jpg)
+![UML Diagram](whiteboardclass09.jpg)
